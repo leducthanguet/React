@@ -1,6 +1,7 @@
 import Expenses from "./components/Expenses/Expenses";
 import React from 'react';
 import NewExpense from "./components/NewExpense/NewExpense"
+import Datetime from "./components/timezone"
 
 function App() {
 
@@ -24,13 +25,19 @@ function App() {
       date: new Date(2021, 2, 28),
     },
     {
+      id: 'e5',
+      title: 'Boxing',
+      amount: 450,
+      date: new Date(2022, 6, 12),
+    },
+    {
       id: 'e4',
       title: 'New Desk (Wooden)',
       amount: 450,
       date: new Date(2021, 5, 12),
     },
   ];
-
+  console.log(expenses)
   // return React.createElement(
   //   'div',
   //   {},
@@ -39,11 +46,17 @@ function App() {
   // )
   const addExpenseHandler = (expense) => {
     console.log("App.js")
-    console.log(expense)
+    // console.log(expense)
   }
+
+  const getTime = (time) => {
+    // console.log(time);
+  }
+
   return (
     <div>
       <h2>Let's get started!</h2>
+      <Datetime onGetTime={getTime}/>
       <NewExpense onAddExpense={addExpenseHandler} />
       <Expenses items={expenses}/>
     </div>

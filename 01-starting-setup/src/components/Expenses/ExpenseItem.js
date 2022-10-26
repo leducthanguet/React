@@ -15,22 +15,30 @@ function ExpenseItem(props) {
     // else {
     //   console.log(title);
     // }
-    console.log(title)
+    // console.log(title)
     const clickHandler = () => {
       setTitle("Updated!!!")
       console.log(title)
     }
-    // console.log("Hello");
-    return (
-      <Card className="expense-item">
-        <ExpenseDate date={props.date} />
-        <div className="expense-item__description">
-          <h2>{title}</h2>
-          <div className="expense-item__price">{props.amount}</div>
-        </div>
-        <button onClick={clickHandler}>Change Title</button>
-      </Card>
-    );
+
+    if(props.date.getFullYear()==props.filterYear){
+      return (
+        <Card className="expense-item">
+          <ExpenseDate date={props.date} />
+          <div className="expense-item__description">
+            <h2>{title}</h2>
+            <div className="expense-item__price">{props.amount}</div>
+          </div>
+          <button onClick={clickHandler}>Change Title</button>
+        </Card>
+      );
+    }
+    else{
+      return (
+        <div></div>
+      )
+    }
+
   }
   
 export default ExpenseItem;
