@@ -2,7 +2,8 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialUiState = {
     cartIsVisible: false,
-    notification: null
+    notification: null,
+    showProducts: true,
 }
 
 const uiSlice = createSlice({
@@ -19,6 +20,9 @@ const uiSlice = createSlice({
                 message: action.payload.message,
             };
         },
+        setShowProducts(state) {
+            state.showProducts = !state.showProducts;
+        }
     }
 })
 

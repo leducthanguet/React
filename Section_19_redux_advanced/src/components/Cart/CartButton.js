@@ -9,12 +9,31 @@ const CartButton = (props) => {
   const  toggleCartHandler = () => {
     dispatch(uiActions.toggle());
   }
+  const addItemHandler = () => {
+    dispatch(cartActions.setIsAdd());
+  }
 
+  const showProductHandler = () => {
+    dispatch(uiActions.setShowProducts());
+  }
+  const isAdd  = useSelector(state => state.cart.isAdd);
+  const stateAdd = isAdd ? "Disable addItem": "Enable addItem";
   return (
-    <button className={classes.button} onClick={toggleCartHandler}>
-      <span>My Cart</span>
-      <span className={classes.badge}>{cartQuantity}</span>
-    </button>
+    <div>
+      <button className={classes.button} onClick={toggleCartHandler}>
+        <span>My Cart</span>
+        <span className={classes.badge}>{cartQuantity}</span>
+      </button>
+
+      <button className={classes.button} onClick={addItemHandler}>
+        <span className={classes.badge}>{stateAdd}</span>
+      </button>
+
+      <button className={classes.button} onClick={showProductHandler}>
+        <span className={classes.badge}>Show My Favorite Products</span>
+      </button>
+    </div>
+
   );
 };
 
