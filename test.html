@@ -1,13 +1,86 @@
 <html>
-    <body>
+    <head>
+        <style>
+            .menu {
+                position: fixed;
+                background-color: #2F4DB6;
+                z-index: 30;
+                width: 80px;
+                height: 100%;
+                left:0;
+                top:0;
+            }
+            .sidebar {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                top: 80px;
+                /* background-color: #2F4DB6; */
+                width: 80px;
+                z-index: 200;
+                padding-top: 5px;
+                /* display: flex;
+                justify-content: center;
+                flex-direction: column; */
+            }
 
+            .sidebar-link {
+                height: 64px;
+                width: 80px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                cursor: pointer;
+            }
+
+            .sidebar-link:hover {
+                background-color: rgb(235, 235, 235);
+            }
+
+            .sidebar-link img {
+                height: 24px;
+                margin-bottom: 4px;
+            }
+
+            .sidebar-link div {
+                font-family: Roboto, Arial;
+                font-size: 10px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="menu">
+            <div class="sidebar">
+                <div class="sidebar-link">
+                  <img src="icons/home.svg">
+                  <div>Home</div>
+                </div>
+                <div class="sidebar-link">
+                  <img src="icons/explore.svg">
+                  <div>Explore</div>
+                </div>
+                <div class="sidebar-link">
+                  <img src="icons/subscriptions.svg">
+                  <div>Subscriptions</div>
+                </div>
+                <div class="sidebar-link">
+                  <img src="icons/originals.svg">
+                  <div>Originals</div>
+                </div>
+                <div class="sidebar-link">
+                  <img src="icons/youtube-music.svg">
+                  <div>YouTube Music</div>
+                </div>
+                <div class="sidebar-link">
+                  <img src="icons/library.svg">
+                  <div>Library</div>
+                </div>
+            </div>
+        </div>
+
+      
     </body>
     <script>
-
-        if(1===1){
-            var x=5;
-            console.log(x);
-        }
-        console.log(x);
     </script>
 </html>
