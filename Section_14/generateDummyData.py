@@ -71,8 +71,8 @@ def generateItem():
         'CustomerCode': str(uuid.uuid4()),
         'CustomerName': '',
         'Birthday': generateDateOfBirth(),
-        'HokenSyubetu': '',
-        'OwUserName': '',
+        'HokenSyubetu': 'さんではないですか',
+        'OwUserName': 'さんでは',
         'ExistMessage': generateItems([True, False]),
         'ContactTime': generateContactTime()
     }
@@ -87,8 +87,12 @@ for i in range(10):
 
 data['tasks'] = tasks
 # .dumps() as a string
-json_string = json.dumps(data)
-print(json_string)
+json_string = json.dumps(data, ensure_ascii=False)
 # Directly from dictionary
-with open('json_data.json', 'w') as outfile:
-    outfile.write(json_string)
+with open('json_data.json', 'wb') as outfile:
+    outfile.write(json_string.encode("utf8"))
+
+
+# data = {"a": "さんではないですか"}
+# with open('data.json', 'wb') as fp:
+#     fp.write(json.dumps(data, ensure_ascii=False).encode("utf8"))
