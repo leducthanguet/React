@@ -54,7 +54,7 @@ def generateContactTime():
     else:
         str_minute = str(minute)
 
-    if minute < 10:
+    if second < 10:
         str_second = "0" + str(second)
     else:
         str_second = str(second)
@@ -66,10 +66,10 @@ def generateContactTime():
 
 def generateItem():
     return {
-        'ServiceType': '',
+        'ServiceType': generateItems([0, 7, 8, 9]),
         'EventStatusName': generateItems(['a', 'b', 'c']),
         'CustomerCode': str(uuid.uuid4()),
-        'CustomerName': '',
+        'CustomerName': generateItems(['さんでは', 'いですか']),
         'Birthday': generateDateOfBirth(),
         'HokenSyubetu': 'さんではないですか',
         'OwUserName': 'さんでは',

@@ -1,14 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from "react";
 
-import MoviesList from './components/MoviesList';
-import './App.css';
+import MoviesList from "./components/MoviesList";
+import "./App.css";
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  
-  const fetchMoviesHandler = async () => {
-    setIsLoading(true);
+  const [counter, setCounter] = useState(0);
+
+  const fetchMoviesHandler = async (count) => {
+    console.log("Counter is: ", count);
+    // setIsLoading(true);
     const reponse = await fetch("https://swapi.dev/api/films/");
     const data = await reponse.json();
     const transformedMovies = data.results.map((movieData) => {
@@ -17,52 +19,41 @@ function App() {
         title: movieData.title,
         openingText: movieData.opening_crawl,
         releaseDate: movieData.release_date,
-      }
+      };
     });
-    setMovies(transformedMovies);
-    setIsLoading(false);
-  };
-  // const fetchMoviesHandler = () => {
-  //   fetch("https://swapi.dev/api/films/")
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       const transformedMovies = data.results.map((item) => {
-  //         return {
-  //           id: item.episode_id,
-  //           title: item.title,
-  //           openingText: item.opening_crawl,
-  //           releaseDate: item.release_date,
-  //         }
-  //       });
-  //       setMovies(transformedMovies);
-  //     })
-  // }
-  // const dummyMovies = [
-  //   {
-  //     id: 1,
-  //     title: 'Some Dummy Movie',
-  //     openingText: 'This is the opening text of the movie',
-  //     releaseDate: '2021-05-18',
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Some Dummy Movie 2',
-  //     openingText: 'This is the second opening text of the movie',
-  //     releaseDate: '2021-05-19',
-  //   },
-  // ];
 
+    setMovies(transformedMovies);
+
+    // setIsLoading(false);
+  };
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => prevCounter + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  console.log(counter);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchMoviesHandler(counter);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
   return (
     <React.Fragment>
       <section>
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
-        {!isLoading && movies.length >0 && <MoviesList movies={movies} />}
-        {!isLoading && movies.length === 0 && <p>Found no Movies.</p>}
-        {isLoading && <p>Loading...</p>}
+        <MoviesList movies={movies} />
+        <p>{counter}</p>
+        {/* {!isLoading && movies.length > 0 && <MoviesList movies={movies} />} */}
+        {/* {!isLoading && movies.length === 0 && <p>Found no Movies.</p>} */}
+        {/* {isLoading && <p>Loading...</p>} */}
       </section>
     </React.Fragment>
   );
