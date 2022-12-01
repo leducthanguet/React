@@ -6,9 +6,11 @@ import "./App.css";
 function App() {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [counter, setCounter] = useState(0);
 
-  const fetchMoviesHandler = async () => {
-    setIsLoading(true);
+  const fetchMoviesHandler = async (count) => {
+    console.log("Counter is: ", count);
+    // setIsLoading(true);
     const reponse = await fetch("https://swapi.dev/api/films/");
     const data = await reponse.json();
     const transformedMovies = data.results.map((movieData) => {
@@ -21,10 +23,25 @@ function App() {
     });
 
     setMovies(transformedMovies);
-    setIsLoading(false);
+
+    // setIsLoading(false);
   };
+
   useEffect(() => {
-    fetchMoviesHandler();
+    const interval = setInterval(() => {
+      setCounter((prevCounter) => prevCounter + 1);
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  console.log(counter);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchMoviesHandler(counter);
+    }, 1000);
+
+    return () => clearInterval(interval);
   }, []);
   return (
     <React.Fragment>
@@ -33,9 +50,10 @@ function App() {
       </section>
       <section>
         <MoviesList movies={movies} />
-        {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
-        {!isLoading && movies.length === 0 && <p>Found no Movies.</p>}
-        {isLoading && <p>Loading...</p>}
+        <p>{counter}</p>
+        {/* {!isLoading && movies.length > 0 && <MoviesList movies={movies} />} */}
+        {/* {!isLoading && movies.length === 0 && <p>Found no Movies.</p>} */}
+        {/* {isLoading && <p>Loading...</p>} */}
       </section>
     </React.Fragment>
   );
